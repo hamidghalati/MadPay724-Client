@@ -9,7 +9,9 @@ import { PanelModule } from './panel/panel.module';
 import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
 import { adminRoutes } from './routes/routes.routing';
-
+import { ErrorInterceptorProvider } from './Services/error.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,17 @@ import { adminRoutes } from './routes/routes.routing';
     AppRoutingModule,
     PanelModule,
     AuthModule,
-    RouterModule.forRoot(adminRoutes)
+    BrowserAnimationsModule,
+    RouterModule.forRoot(adminRoutes),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+      progressAnimation: 'decreasing'
+    })
   ],
-  providers: [],
+  providers: [ErrorInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

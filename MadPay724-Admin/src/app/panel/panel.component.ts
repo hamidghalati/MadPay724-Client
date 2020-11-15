@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import Chartist from '../../assets/vendors/js/chartist.min.js';
 
 @Component({
@@ -8,7 +10,7 @@ import Chartist from '../../assets/vendors/js/chartist.min.js';
 })
 export class PanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private alertSystem: ToastrService) { }
 
   ngOnInit() {
     this.loadChart();
@@ -671,5 +673,11 @@ export class PanelComponent implements OnInit {
         }
       }
     });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['auth/login']);
+    this.alertSystem.info('با موفقیت خارج شدید' , 'خروج');
   }
 }

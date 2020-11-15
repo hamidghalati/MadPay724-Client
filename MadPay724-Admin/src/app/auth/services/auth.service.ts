@@ -21,5 +21,9 @@ login(model: any) {
   );
 }
 
+register(model: any) {
+  return this.http.post(this.baseURL + 'register', model);
+}
+
 }
 
