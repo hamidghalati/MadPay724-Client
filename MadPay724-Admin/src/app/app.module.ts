@@ -12,7 +12,19 @@ import { adminRoutes } from './routes/routes.routing';
 import { ErrorInterceptorProvider } from './Services/error.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxUiLoaderConfig, SPINNER, POSITION, PB_DIRECTION} from 'ngx-ui-loader';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: 'red',
+  bgsPosition: POSITION.centerCenter,
+  bgsSize: 40,
+  pbColor: 'red',
+  bgsType: SPINNER.fadingCircle, // background spinner type
+  fgsType: SPINNER.cubeGrid, // foreground spinner type
+  pbDirection: PB_DIRECTION.rightToLeft, // progress bar direction
+  pbThickness: 5 // progress bar thickness
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +42,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       preventDuplicates: true,
       progressBar: true,
       progressAnimation: 'decreasing'
-    })
+    }),
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderHttpModule,
+    NgxUiLoaderRouterModule
   ],
   providers: [ErrorInterceptorProvider],
   bootstrap: [AppComponent]
